@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        'cursor-blink': 'cursor 1s step-end infinite',
+                    },
+                    keyframes: {
+                        cursor: {
+                            '0%, 100%': { borderColor: 'transparent' },
+                            '50%': { borderColor: 'currentColor' },
+                        }
+                    }
+                }
+            },
+            darkMode: 'class'
+        }
+    </script>
+    <style>
+        .page-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("https://media.istockphoto.com/id/1001279256/vector/technology-network-background.jpg?s=612x612&w=0&k=20&c=paF8I7sCkHbt2jHwRI1cpxUz2pX1F26SKl0XeugJEno=");
+            background-color: #f0f4f8; 
+            /* Fallback color if image fails to load  */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.1;
+            z-index: 0;
+            transition: opacity 0.3s ease-in-out, background-image 0.3s ease-in-out;
+        } 
+        
+        .page-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml,%3Csvg width="6" height="6" viewBox="0 0 6 6" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%239C92AC" fill-opacity="0.1" fill-rule="evenodd"%3E%3Cpath d="M5 0h1L0 5v1H0V0z"/%3E%3Cpath d="M6 5v1H5z"/%3E%3C/g%3E%3C/svg%3E');
+            z-index: 1;
+        }
+        
+        .page-bg::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            z-index: 2;
+        }
+        
+        .dark .page-bg {
+            opacity: 0.05;
+        }
+        
+        .dark .page-bg::after {
+            background-color: rgba(30, 41, 59, 0.4);
+        }
+        
+        /* Make sure content is on top of background */
+        .maincontent > * {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Footer background pattern */
+        .footer-bg {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml,%3Csvg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%239C92AC" fill-opacity="0.05" fill-rule="evenodd"%3E%3Ccircle cx="3" cy="3" r="3"/%3E%3Ccircle cx="13" cy="13" r="3"/%3E%3C/g%3E%3C/svg%3E');
+            z-index: 0;
+        }
+        
+        /* Footer glow effects */
+        
+        /* Sticky footer styles */
+        footer.sticky-footer {
+            bottom: 0;
+            width: 100%;
+            z-index: 10;
+        }
+        
+        /* Add margin after last section to ensure space between content and footer */
+        section:last-of-type {
+            margin-bottom: 4rem;
+        }
+        
+        /* Skill icon hover effects */
+        .skill-card i {
+            transition: all 0.3s ease;
+        }
+        
+        .skill-card:hover i {
+            transform: translateY(-5px) scale(1.2);
+            color: #3B82F6;
+            filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.5));
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300 maincontent">
+    <div class="page-bg" style="background-image: url('https://images.unsplash.com/photo-1557682250-33bd709cbe85?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');"></div>
+    <nav class="navbar fixed top-0 left-0 w-full z-50 bg-transparent transition duration-300">
+        <div class="logo text-white">Portfolio</div>
+        <ul class="nav-links">
+            <li><a href="#home" class="text-white hover:text-blue-300 transition-colors duration-300">Home</a></li>
+            <li><a href="#about" class="text-white hover:text-blue-300 transition-colors duration-300">About</a></li>
+            <li><a href="#skills" class="text-white hover:text-blue-300 transition-colors duration-300">Skills</a></li>
+            <li><a href="#projects" class="text-white hover:text-blue-300 transition-colors duration-300">Projects</a></li>
+            <li><a href="#contact" class="text-white hover:text-blue-300 transition-colors duration-300">Contact</a></li>
+            <li class="social-mobile flex justify-center gap-4 pt-4 md:hidden">
+                <a href="#" target="_blank" class="text-white hover:text-blue-300">
+                    <i class="fab fa-linkedin text-xl"></i>
+                </a>
+                <a href="#" target="_blank" class="text-white hover:text-blue-300">
+                    <i class="fab fa-github text-xl"></i>
+                </a>
+            </li>
+        </ul>
+        <div class="social-links-nav hidden md:flex items-center gap-4 mr-4">
+            <a href="https://www.linkedin.com/in/pratik-makvana/" target="_blank" class="text-white hover:text-blue-300 transition-colors duration-300">
+                <i class="fab fa-linkedin text-xl"></i>
+            </a>
+            <a href="https://github.com/Pratik-makvanaa" target="_blank" class="text-white hover:text-blue-300 transition-colors duration-300">
+                <i class="fab fa-github text-xl"></i>
+            </a>
+        </div>
+        <div class="dark-mode-toggle cursor-pointer mx-3" id="darkModeToggle">
+            <i class="fas fa-moon text-white dark:text-yellow-300 text-xl"></i>
+        </div>
+        <div class="burger">
+            <div class="line1 bg-white"></div>
+            <div class="line2 bg-white"></div>
+            <div class="line3 bg-white"></div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero relative bg-cover bg-center bg-no-repeat min-h-[90vh] flex items-center justify-center" style="background-image: url('https://images.unsplash.com/photo-1617529497471-9218633199c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80'); background-color: #1a202c;">
+        <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+        <div class="hero-content relative z-10 text-white text-center max-w-4xl mx-auto px-4 py-16">
+            <div class="personal-info mb-8 text-center">
+                <h2 class="text-3xl font-bold mb-3 text-white">Pratik Makvana</h2>
+                <!-- <p class="text-gray-300 mb-2"><i class="fas fa-map-marker-alt mr-2"></i>New York, USA</p>
+                <p class="text-gray-300"><i class="fas fa-envelope mr-2"></i>johndoe@example.com</p> -->
+            </div>
+            <h1 class="text-5xl font-bold mb-6 text-white ">Welcome to My Portfolio</h1>
+            <p class="text-xl mb-8 text-white">I'm a <span class="typed-text text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 font-bold relative after:content-['|'] after:ml-1 after:text-white after:animate-cursor-blink"></span></p>
+            <div class="cta-buttons flex flex-wrap justify-center gap-4">
+                <a href="#projects" class="btn primary bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-md transition-colors duration-300">View My Projects</a>
+                <a href="#contact" class="btn secondary bg-transparent border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-3 rounded-md transition-colors duration-300">Contact Me</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about pt-10 bg-white dark:bg-gray-900">
+        <h2 class="dark:text-white">About Me</h2>
+        <div class="about-content flex flex-col md:flex-row gap-8 items-start">
+            <div class="about-text flex-1">
+                <div class="personal-details mb-6 p-5 bg-gray-50 dark:bg-gray-800 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-bold mb-3 text-gray-800 dark:text-white">Personal Information</h3>
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <li class="flex items-center text-gray-700 dark:text-gray-300">
+                            <i class="fas fa-user mr-2 w-6 text-blue-500"></i>
+                            <span class="font-semibold mr-2">Name:</span> Pratik Makvana
+                        </li>
+                        <li class="flex items-center text-gray-700 dark:text-gray-300">
+                            <i class="fas fa-graduation-cap mr-2 w-6 text-blue-500"></i>
+                            <span class="font-semibold mr-2">Degree:</span> BCA
+                        </li>
+                        <li class="flex items-center text-gray-700 dark:text-gray-300">
+                            <i class="fas fa-map-marker-alt mr-2 w-6 text-blue-500"></i>
+                            <span class="font-semibold mr-2">Location:</span> Mandsaur, Madhya Pradesh
+                        </li>
+                        <li class="flex items-center text-gray-700 dark:text-gray-300">
+                            <i class="fas fa-envelope mr-2 w-6 text-blue-500"></i>
+                            <span class="font-semibold mr-2">Email:</span> pratikmakvana16@example.com
+                        </li>
+                        <li class="flex items-center text-gray-700 dark:text-gray-300">
+                            <i class="fas fa-phone mr-2 w-6 text-blue-500"></i>
+                            <span class="font-semibold mr-2">Phone:</span> +91 7247637104
+                        </li>
+                    </ul>
+                </div>
+                <div class="mb-4 text-gray-800 dark:text-gray-300">
+                    <p>Hello! I'm a passionate developer with a keen interest in creating beautiful and functional web applications. I love turning ideas into reality through code.</p>
+                    <p>With a strong foundation in web development and a continuous desire to learn, I strive to build innovative solutions that make a difference.</p>
+                </div>
+            </div>
+            <div class="about-image flex-1">
+                <img src="https://img.freepik.com/free-photo/rear-view-programmer-working-all-night-long_1098-18697.jpg" class="rounded-lg shadow-lg w-full">
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="skills pt-10 bg-white dark:bg-gray-900">
+        <h2 class="dark:text-white">My Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-card dark:bg-gray-800 dark:text-white">
+                <i class="fab fa-html5"></i>
+                <h3>HTML5</h3>
+            </div>
+            <div class="skill-card dark:bg-gray-800 dark:text-white">
+                <i class="fab fa-css3-alt"></i>
+                <h3>CSS3</h3>
+            </div>
+            <div class="skill-card dark:bg-gray-800 dark:text-white">
+                <i class="fab fa-js"></i>
+                <h3>JavaScript</h3>
+            </div>
+            <div class="skill-card dark:bg-gray-800 dark:text-white">
+                <i class="fa-brands fa-bootstrap"></i>
+                <h3>Bootstrap</h3>
+            </div>
+            <div class="skill-card dark:bg-gray-800 dark:text-white">
+                <i class="fab fa-react"></i>
+                <h3>React</h3>
+            </div>
+            <div class="skill-card dark:bg-gray-800 dark:text-white">
+                <i class="fa-brands fa-node"></i>
+                <h3>Node.js</h3>
+            </div>
+            <div class="skill-card dark:bg-gray-800 dark:text-white">    
+                <i class="fab fa-js"></i>
+                <h3>Express.js</h3>
+            </div>
+            <div class="skill-card dark:bg-gray-800 dark:text-white">
+                <i class="fa-solid fa-database"></i>
+                <h3>MongoDB</h3>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects pt-10 bg-white dark:bg-gray-900">
+        <h2 class="dark:text-white">My Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card dark:bg-gray-800">
+                <img src="p1.jpeg" alt="Project 1">
+                <h3 class="dark:text-white"><b>Wanderlust</b> - A platform to book, review, and list premium hotels.</h3>
+                <p class="dark:text-gray-300">Premium Hotel Booking Platform is a web app for exploring and booking hotels.
+                    Users can filter, book, and review premium hotels.
+                    Hotel owners can register & list their hotels for public booking.</p>
+                <div class="project-links cursor-pointer">
+                    <a href="#" class="btn dark:bg-blue-600 dark:text-white">View Live</a>
+                    <a href="https://github.com/Pratik-makvanaa/Wanderlust" class="btn dark:bg-gray-700 dark:text-white">GitHub</a>
+                </div>
+            </div>
+            <div class="project-card dark:bg-gray-800">
+                <img src="p3.avif" alt="Project 2">
+                <h3 class="dark:text-white"><b>React Projects</b></h3>
+                <p class="dark:text-gray-300">Text translator using React, TailwindCSS & RapidAPI</p>
+                <p class="dark:text-gray-300">Random String Generator using useEffect & useCallback in React</p>
+                <div class="project-links">
+                    <a href="#" class="btn dark:bg-blue-600 dark:text-white">View Live</a>
+                    <a href="https://github.com/Pratik-makvanaa/text-translator" class="btn dark:bg-gray-700 dark:text-white">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact pt-10 bg-white dark:bg-gray-900">
+        <h2 class="dark:text-white">Contact Me</h2>
+        <div class="contact-content">
+            <form id="contact-form" class="">
+                <div class="form-group">
+                    <input type="text" id="name" name="name" required placeholder="Your Name" class="dark:bg-gray-700 dark:text-white dark:border-gray-600">
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" name="email" required placeholder="Your Email" class="dark:bg-gray-700 dark:text-white dark:border-gray-600">
+                </div>
+                <div class="form-group">
+                    <textarea id="message" name="message" required placeholder="Your Message" class="dark:bg-gray-700 dark:text-white dark:border-gray-600"></textarea>
+                </div>
+                <button type="submit" class="btn primary dark:bg-blue-600 dark:text-white">Send Message</button>
+            </form>
+            <div class="about-image ml-5">
+                <img src="https://wpengine.com/wp-content/uploads/2022/07/WP-Trends_1200x627-1024x535.jpeg">
+            </div>
+        </div>
+    </section>
+    <footer class="bg-gradient-to-r from-blue-600 to-indigo-900 text-white footer-bg relative mt-16 py-6 mt-auto">
+        <div class="absolute top-0 left-0 bottom-0 w-full overflow-hidden" style="transform: translateY(-99%)">
+            <svg preserveAspectRatio="none" width="100%" height="50" viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" style="fill: #85a5fc;">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"></path>
+            </svg>
+        </div>
+        <div class="container mx-auto px-4 relative z-10 py-8">     
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="footer-about">
+                    <h3 class="text-xl font-bold mb-4 text-white footer-title">Pratik Makvana</h3>
+                    <p class="text-gray-300 mb-4">A passionate web developer focused on creating elegant, user-friendly solutions for complex problems.</p>
+                </div>  
+                <div class="footer-links">
+                    <h3 class="text-xl font-bold mb-4 text-white footer-title">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-300 hover:text-blue-300 transition-colors duration-300">Home</a></li>
+                        <li><a href="#about" class="text-gray-300 hover:text-blue-300 transition-colors duration-300">About</a></li>
+                        <li><a href="#skills" class="text-gray-300 hover:text-blue-300 transition-colors duration-300">Skills</a></li>
+                        <li><a href="#projects" class="text-gray-300 hover:text-blue-300 transition-colors duration-300">Projects</a></li>
+                        <li><a href="#contact" class="text-gray-300 hover:text-blue-300 transition-colors duration-300">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3 class="text-xl font-bold mb-4 text-white footer-title">Contact Me</h3>
+                    <div class="space-y-2 text-gray-300">
+                        <p><i class="fas fa-envelope mr-2 text-blue-300 footer-icon"></i>pratikmakvana16@gmail.com</p>
+                        <p><i class="fas fa-phone mr-2 text-blue-300 footer-icon"></i>+91 7247637104</p>
+                        <p><i class="fas fa-map-marker-alt mr-2 text-blue-300 footer-icon"></i>Mandsaur, Madhya Pradesh</p>
+                    </div>
+                    <div class="social-links mt-4 flex justify-center ml-auto space-x-6">
+                        <a href="https://www.linkedin.com/in/pratik-makvana/" target="_blank" class="text-gray-300 mr-2 hover:text-blue-300 transition-colors duration-300 ">
+                            <i class="fab fa-linkedin text-xl footer-icon text-2xl"></i>
+                        </a>
+                        <a href="https://github.com/Pratik-makvanaa" target="_blank" class="text-gray-300 hover:text-white transition-colors duration-300">
+                            <i class="fab fa-github text-xl footer-icon"></i>
+                        </a>
+                        <a href="#" target="_blank" class="text-gray-300 hover:text-blue-300 transition-colors duration-300">
+                            <i class="fab fa-twitter text-xl footer-icon"></i>
+                        </a>
+                        <a href="mailto:pratikmakvana16@gmail.com" target="_blank" class="text-gray-300 hover:text-red-300 transition-colors duration-300">
+                            <i class="fas fa-envelope text-xl footer-icon"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-blue-800 mt-8 pt-6 text-center">
+                <p class="text-gray-300">&copy; 2025. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 
