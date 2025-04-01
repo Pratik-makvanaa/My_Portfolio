@@ -105,13 +105,12 @@ body {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* About Section */
+/* about section  */
 .about {
     padding: 5rem 6%;
     /* background: #6769d5; */
     /* background-image: url("https://images.unsplash.com/photo-1557682250-33bd709cbe85?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80"); */
 }
-
 .about h2 {
     text-align: center;
     margin-bottom: 3rem;
@@ -127,12 +126,10 @@ body {
     justify-content: space-between;
     flex-wrap: wrap;  /* Allow items to wrap on small screens */
 }
-
-.about-text, .about-image {
+.about-text .about-image {
     flex: 1;
     min-width: 300px;  /* Ensures both columns are at least 300px on small screens */
 }
-
 .about-image img {
     width: 100%;
     border-radius: 10px;
@@ -140,13 +137,20 @@ body {
 }
 
 @media (max-width: 768px) {
-    .about h2 {
+.about h2 .about h3{
         font-size: 1.5rem;  /* Smaller font size on medium and small screens */
     }
 
+    .about h2 {
+        font-size: 1.5rem;  /* Smaller font size on medium and small screens */
+    }
     .about-content {
         flex-direction: column;  /* Stack content vertically on smaller screens */
         gap: 2rem;  /* Reduced gap between elements */
+    }
+
+    .about-image img {
+        max-width: 100%;  /* Ensure image is fully responsive */
     }
 
     .about-image img {
@@ -159,6 +163,12 @@ body {
 }
 
 @media (max-width: 480px) {
+    .about h2 .about h3{
+        font-size: 1.25rem;  /* Smaller font size for very small screens */
+    }
+    .about-text {
+        padding: 1rem;  /* Further reduced padding */
+    }
     .about h2 {
         font-size: 1.25rem;  /* Smaller font size for very small screens */
     }
@@ -172,6 +182,46 @@ body {
     }
 }
 
+/* Style for the list items */
+ul li {
+    display: flex;
+    align-items: center; /* Align icon and text vertically */
+    flex-wrap: wrap; /* Allows wrapping for smaller screens */
+    gap: 0.5rem; /* Space between icon and text */
+    word-wrap: break-word; /* Prevents long text from overflowing */
+    overflow-wrap: break-word; /* Ensures long words (like email) wrap onto the next line */
+}
+
+/* Specific style for the icon */
+ul li i {
+    width: 24px; /* Adjust size for responsiveness */
+    height: 24px; /* Ensure consistent size */
+    text-align: center; /* Center the icon */
+}
+
+/* Adjusting email span for long text */
+ul li span {
+    white-space: normal; /* Ensure text wraps when necessary */
+    word-break: break-word; /* Break long words (e.g., email) to prevent overflow */
+    max-width: 100%; /* Ensure the text doesn't overflow */
+}
+
+/* On smaller screens, adjust text size */
+@media (max-width: 768px) {
+    ul li {
+        flex-direction: column; /* Stack icon and text vertically */
+        align-items: flex-start; /* Align items to the left */
+        gap: 0.25rem; /* Reduce gap when stacked */
+    }
+
+    ul li .font-semibold {
+        font-size: 0.9rem; /* Adjust font size on smaller screens */
+    }
+
+    ul li span {
+        word-wrap: break-word; /* Ensures long emails break into the next line */
+    }
+}
 /* Skills Section */
 .skills {
     padding: 5rem 10%;
