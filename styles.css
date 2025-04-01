@@ -116,20 +116,60 @@ body {
     text-align: center;
     margin-bottom: 3rem;
     color: #020202;
-    font-size: xx-large;
+    font-size: 2rem;  /* Adjusted for better responsiveness */
 }
 
 .about-content {
     display: flex;
-    grid-template-columns: 1fr 2fr;
+    flex-direction: row;  /* Default to row layout */
     gap: 3rem;
     align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;  /* Allow items to wrap on small screens */
+}
+
+.about-text, .about-image {
+    flex: 1;
+    min-width: 300px;  /* Ensures both columns are at least 300px on small screens */
 }
 
 .about-image img {
     width: 100%;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .about h2 {
+        font-size: 1.5rem;  /* Smaller font size on medium and small screens */
+    }
+
+    .about-content {
+        flex-direction: column;  /* Stack content vertically on smaller screens */
+        gap: 2rem;  /* Reduced gap between elements */
+    }
+
+    .about-image img {
+        max-width: 100%;  /* Ensure image is fully responsive */
+    }
+
+    .about-text {
+        padding: 1.5rem;  /* Adjust padding on smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .about h2 {
+        font-size: 1.25rem;  /* Smaller font size for very small screens */
+    }
+
+    .about-text {
+        padding: 1rem;  /* Further reduced padding */
+    }
+
+    .about-content {
+        gap: 1.5rem;  /* Smaller gap for very small screens */
+    }
 }
 
 /* Skills Section */
